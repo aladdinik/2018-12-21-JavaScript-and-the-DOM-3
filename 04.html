@@ -6,9 +6,8 @@
     <link href="zIK-TEMP/2-css-temp/normalize.css" rel="stylesheet" type="text/css">
     <link href="zIK-TEMP/2-css-temp/pik-css-temp.css" rel="stylesheet" type="text/css">
     <script src="zIK-TEMP/3-JS-temp/js-temp.js"></script>
-    <title>04 </title>
-    <style></style>
-</head><!-- buttons to move list up and remove too-->
+    <title>04 buttons to move list up and remove too / .previousElementSibling / .insertBefore()</title>
+</head><!-- buttons to move list up and remove too / .previousElementSibling / .insertBefore() /  create the down button / .nextElementSibling -->
 <body>
 <main>
 	<div>
@@ -46,9 +45,9 @@
 	//	const _removeB = document.getElementsByClassName(`removex`); err
 	const _upB = document.querySelectorAll(`.upx`);
 
-//remove button function / .addEventListener()
+/*remove button function / .addEventListener() */
 	const _removeFunc = (event) => {
-		if (event.target.className === `removex`) {
+		if (event.target.className === `removex`) {    //IK EX
 			const _li = event.target.parentNode;
 			const _ul = _li.parentNode;
 			_ul.removeChild(_li);
@@ -56,14 +55,17 @@
 	};
 	
 	_divUl.addEventListener(`click`, _removeFunc, false);	
-	//	_removeB.addEventListener(`click`, _removeFunc, false); err
-	/*  BIM you must select the container div or ul and not the button because event object is already taking of the button with event.target. */
+	//	_removeB.addEventListener(`click`, _removeFunc, false);    err
+	/*  BIM you must select the container div or ul and not the button because event object is already taking care of the button with event.target. */
 	
-// move up button .addEventListener()
+	/*****************************************/
+	
+/* move up button .addEventListener() / .previousElementSibling */
+//using annoymous function 
 	_divUl.addEventListener(
 		`click`,
 		e => {
-			if (e.target = _upB) {          //.1
+			if (e.target.className === `upx`) {          //.1 //IK EX
 				if (e.target.parentNode.previousElementSibling) {         //.2
 					const _ul = e.target.parentNode.parentNode;
 					const _li = e.target.parentNode;
@@ -74,8 +76,8 @@
 		},
 		true             //.5
 	);
-	//.1 its true because event.target is _upB or you could just type _upB alone.
-	//.1 also notice that == / === will not work ???...
+	//.1 failed . event.target is _upB or you could just type _upB alone but will not work. see IK EX 
+	//.1 also notice that == / === will not work ???... which probably indicate its not specific
 	//.2 prevents list cycling downwards at the top of the list if the list is first on the list, so it remains put
 	//.2 you can also insert this if statment before the .insertBefore() as it is the only form of action
 	//.3 records the list element sibling before the current list
@@ -85,14 +87,47 @@
 	+\ so with 2 or more if statement you can have more option IK but i think its best to use else if 
 	+\ it is highly discourage to use if like this so always try to keep everything seperate */
 	
+	/*****************************************/
+	
+/* create the down button / .addEventListener() / .nextElementSibling */
+//create new button through DOM
+	//const _li = _upB.parentNode;                    //.1	
+	const _li = document.getElementsByTagName(`li`);  //.2
+	//.1 will not work because it does not target all li , just the first one
+	//.2 targets all li
+	
+	for (let i = 0; i < _li.length; i++) {
+		const _newDownB = document.createElement(`button`);
+		_newDownB.textContent = `down`;
+		_newDownB.className = `downx`;       //.3
+		_li[i].appendChild(_newDownB);
+	};
+	//.3 needed to specify this more because up button is also working using this button. so its for the following codes
+	/* you have to insert .createElement() within the for loop otherwise it only creates one element for you to use which will end at the button of the list */
+
+// function and .addEventListener() for implying the down movement
+	const downB = document.getElementsByClassName(`downx`);
+	
+	const _downFunc = evt => {
+		if (evt.target.className === `downx`) {          //IK EX
+			const _li = evt.target.parentNode;
+			const _ul = _li.parentNode;
+			const _afterLi = _li.nextElementSibling;
+			if (_afterLi) {
+				_ul.insertBefore(_afterLi, _li);
+			};
+		};
+	};
+
+	_divUl.addEventListener(`click`, _downFunc, false);
+
+//IK EX  = apperently in the if statement ,you have to be precise/specific what you mean because if you are not than it will still work but causes it fire at all the other buttons under the same container and cause me so much problems as one works but the other does not. 
 
 
 
 
 
-
-// printD();
-// console.log();
+	
 </script>
 </main>
 </body>

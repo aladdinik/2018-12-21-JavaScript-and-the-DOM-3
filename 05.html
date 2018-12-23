@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="zIK-TEMP/2-css-temp/normalize.css" rel="stylesheet" type="text/css">
+    <link href="zIK-TEMP/2-css-temp/pik-css-temp.css" rel="stylesheet" type="text/css">
+    <script src="zIK-TEMP/3-JS-temp/js-temp.js"></script>
+    <title></title>
+    <style></style>
+</head><!-- enter brief description of the page-->
+<body>
+<main>
+	<input type="text">
+	<button id="addlistx">Add to list</button>
+
+	<div>
+		<ul id="divuly">
+			<li>
+				number 1 
+				<button class="removex">remove</button>
+				<button class="upx">up</button>
+				<button class="downx">down</button>
+			</li>			
+			<li>
+				number 2 
+				<button class="removex">remove</button>
+				<button class="upx">up</button>
+				<button class="downx">down</button>
+			</li>			
+			<li>
+				number 3 
+				<button class="removex">remove</button>
+				<button class="upx">up</button>
+				<button class="downx">down</button>
+			</li>			
+			<li>
+				number 4 
+				<button class="removex">remove</button>
+				<button class="upx">up</button>
+				<button class="downx">down</button>
+			</li>
+			<li>
+				number 5 
+				<button class="removex">remove</button>
+				<button class="upx">up</button>
+				<button class="downx">down</button>
+			</li>
+		</ul>	
+	</div>
+
+<script>
+	const input$ = document.getElementsByTagName(`input`)[0];
+	const addB$ = document.getElementById(`addlistx`);
+	const divUl$ = document.querySelector(`div #divuly`);
+	const removeB$ = document.getElementsByClassName(`removex`);
+	const upB$ = document.querySelectorAll(`.upx`);
+	const downB$ = document.getElementsByClassName(`downx`);
+
+// add all type button function
+	const addButtons$ = (parentLi) => {
+		let newRemoveB = document.createElement(`button`)
+		newRemoveB.textContent = `remove`;
+		parentLi.appendChild(newRemoveB);
+		
+		let newUpB = document.createElement(`button`)
+		newUpB.textContent = `up`;
+		parentLi.appendChild(newUpB);		
+		
+		let newDownB = document.createElement(`button`)
+		newDownB.textContent = `down`;
+		parentLi.appendChild(newDownB);
+	};
+	
+// adding list with input value and new buttons
+	const addLi$ = () => {
+		let newLi$ = document.createElement(`li`);
+		newLi$.textContent = input$.value;
+		divUl$.appendChild(newLi$, );           zzzzzzzzzzzzzzz
+		
+	};
+	
+	addB$.addEventListener(`click`, addLi$, false);
+	
+	
+	
+	
+	
+
+// printD();
+// console.log();
+</script>
+</main>
+</body>
+</html>
